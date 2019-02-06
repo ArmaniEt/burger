@@ -1,3 +1,8 @@
 .form_border {
     border: solid 1px black;
+    border-radius: 10px;
+}
+
+.order_form_article {
+    text-align: center;
 }

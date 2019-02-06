@@ -10,13 +10,19 @@ const availableIngredients = [
     {name: 'meat', price: 50, label: 'Мясо'},
     {name: 'cheese', price: 20, label: 'Сыр'}
     ];
+export {availableIngredients};
+
 
 class App extends Component {
     render() {
         return (
             <div>
-                <BurgerComponent ingredients = {this.state.ingredients}/>
-                <OrderForm/>
+                <BurgerComponent ingredients={this.state.ingredients}/>
+                <OrderForm
+                    quantity = {this.getQuantity}
+                    clickRemoveIngredient={this.removeIngredient}
+                    clickAddIngredient = {this.addIngredient}
+                    total = {this.countTotal()}/>
             </div>
         );
     }
@@ -25,9 +31,9 @@ class App extends Component {
     state = {
         ingredients: {
             salad: {count: 0, total: 0},
-            cheese: {count: 1, total: 0},
-            meat: {count: 2, total: 0},
-            bacon: {count: 1, total: 0}
+            cheese: {count: 0, total: 0},
+            meat: {count: 0, total: 0},
+            bacon: {count: 0, total: 0}
         }
     };
 
@@ -68,7 +74,28 @@ class App extends Component {
 
         this.setState(state);
 
+    };
+
+    countTotal = () => {
+        let total = 0;
+        let keys = Object.keys(this.state.ingredients);
+        let counter = 0;
+
+
+        while(counter < keys.length){
+            total += this.state.ingredients[keys[counter]].total;
+            counter++;
+        }
+        return total;
+
+
+    };
+
+    getQuantity = (name) => {
+        // get ingredient by his name
+        // return count property of that ingredient
+        return this.state.ingredients[name].count;
+
     }
 }
-
 export default App;

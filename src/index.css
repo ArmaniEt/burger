@@ -1,8 +1,18 @@
 .button_form {
   display: inline-block;
+  margin: 3px 3px;
+  padding: 5px 25px;
+}
 
+.button_form:hover{
+  cursor: pointer;
 }
 
 .form_article {
   display: inline-block;
+  padding: 10px 10px;
+}
+
+.element_form_block {
+  text-align: center;
 }
