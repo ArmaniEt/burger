@@ -13,7 +13,7 @@ const availableIngredients = [
 class App extends Component {
     render() {
         return (
-            <BurgerComponent/>
+            <BurgerComponent ingredients = {this.state.ingredients}/>
         );
     }
 
@@ -22,8 +22,8 @@ class App extends Component {
         ingredients: {
             salad: {count: 0, price: 5},
             cheese: {count: 1, price: 20},
-            meat: {count: 0, price: 50},
-            bacon: {count: 0, price: 30}
+            meat: {count: 2, price: 50},
+            bacon: {count: 1, price: 30}
         }
     };
 
