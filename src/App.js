@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import './App.css';
 import BurgerComponent from "./Burger/Burger";
+import OrderForm from "./OrderForm/OrderForm";
 
 
 const availableIngredients = [
@@ -13,17 +14,20 @@ const availableIngredients = [
 class App extends Component {
     render() {
         return (
-            <BurgerComponent ingredients = {this.state.ingredients}/>
+            <div>
+                <BurgerComponent ingredients = {this.state.ingredients}/>
+                <OrderForm/>
+            </div>
         );
     }
 
 
     state = {
         ingredients: {
-            salad: {count: 0, price: 5},
-            cheese: {count: 1, price: 20},
-            meat: {count: 2, price: 50},
-            bacon: {count: 1, price: 30}
+            salad: {count: 0, total: 0},
+            cheese: {count: 1, total: 0},
+            meat: {count: 2, total: 0},
+            bacon: {count: 1, total: 0}
         }
     };
 
