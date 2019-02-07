@@ -19,6 +19,7 @@ class App extends Component {
             <div>
                 <BurgerComponent ingredients={this.state.ingredients}/>
                 <OrderForm
+                    isDisabled = {this.isButtonDisabled}
                     quantity = {this.getQuantity}
                     clickRemoveIngredient={this.removeIngredient}
                     clickAddIngredient = {this.addIngredient}
@@ -37,6 +38,10 @@ class App extends Component {
         }
     };
 
+
+    // function ingredientChanger(name, value)
+    // have to know add or remove ingredient
+    // if value - => remove, else value + => add
 
     addIngredient = (name) => {
         let ingredient = {...this.state.ingredients[name]};
@@ -99,6 +104,14 @@ class App extends Component {
         // return count property of that ingredient
         return this.state.ingredients[name].count;
 
-    }
+    };
+
+    //isDisabled method
+
+    isButtonDisabled = (name) => {
+        return this.state.ingredients[name].count === 0;
+
+    };
+
 }
 export default App;

@@ -12,10 +12,12 @@ function OrderForm(props) {
             <div>
 
                 {availableIngredients.map(item => <IngredientControl
+                    key = {item.name}
                     label={item.label}
                     onRemoveIngredient={() => props.clickRemoveIngredient(item.name)}
                     onAddIngredient={() => props.clickAddIngredient(item.name)}
                     ingredientQuantity={() => props.quantity(item.name)}
+                    removeButtonDisabled = {() => props.isDisabled(item.name)}
                 />)}
 
             </div>
