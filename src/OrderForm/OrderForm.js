@@ -14,8 +14,7 @@ function OrderForm(props) {
                 {availableIngredients.map(item => <IngredientControl
                     key = {item.name}
                     label={item.label}
-                    onRemoveIngredient={() => props.clickRemoveIngredient(item.name)}
-                    onAddIngredient={() => props.clickAddIngredient(item.name)}
+                    onChangeIngredient = {(event) => props.changeIngredient(item.name, event)}
                     ingredientQuantity={() => props.quantity(item.name)}
                     removeButtonDisabled = {() => props.isDisabled(item.name)}
                 />)}

@@ -5,11 +5,11 @@ import OrderForm from "./OrderForm/OrderForm";
 
 
 const availableIngredients = [
-    {name: 'salad', price: 5, label: 'Салат'},
+    {name: 'salad', price: 5, label: 'Салат'}, // class Meat
     {name: 'bacon', price: 30, label: 'Бекон'},
     {name: 'meat', price: 50, label: 'Мясо'},
     {name: 'cheese', price: 20, label: 'Сыр'}
-    ];
+];
 export {availableIngredients};
 
 
@@ -19,11 +19,10 @@ class App extends Component {
             <div>
                 <BurgerComponent ingredients={this.state.ingredients}/>
                 <OrderForm
-                    isDisabled = {this.isButtonDisabled}
-                    quantity = {this.getQuantity}
-                    clickRemoveIngredient={this.removeIngredient}
-                    clickAddIngredient = {this.addIngredient}
-                    total = {this.countTotal()}/>
+                    isDisabled={this.isButtonDisabled}
+                    quantity={this.getQuantity}
+                    changeIngredient={this.ingredientChanger}
+                    total={this.countTotal()}/>
             </div>
         );
     }
@@ -40,38 +39,16 @@ class App extends Component {
 
 
     // function ingredientChanger(name, value)
-    // have to know add or remove ingredient
-    // if value - => remove, else value + => add
+    // if event 'add' count+ => remove, else count- => add
 
-    addIngredient = (name) => {
+    ingredientChanger = (name, event) => {
         let ingredient = {...this.state.ingredients[name]};
         let price = availableIngredients.find(item => item.name === name).price;
-
-        ingredient.count += 1;
-        ingredient.total = ingredient.count * price;
-
-        let ingredients = {...this.state.ingredients};
-        ingredients[name] = ingredient;
-
-        let state = {...this.state};
-        state.ingredients = ingredients;
-
-        this.setState(state);
-
-
-    };
-
-    //rewrite two methods Add and Remove :
-    //
-
-    removeIngredient = (name) => {
-        let ingredient = {...this.state.ingredients[name]};
-        let price = availableIngredients.find(item => item.name === name).price;
-
-        if (ingredient.count > 0) {
+        if (event.target.value === 'add') {
+            ingredient.count += 1;
+        }else {
             ingredient.count -= 1;
         }
-
         ingredient.total = ingredient.count * price;
 
         let ingredients = {...this.state.ingredients};
@@ -83,6 +60,7 @@ class App extends Component {
         this.setState(state);
 
     };
+
 
     countTotal = () => {
         let total = 0;
@@ -90,7 +68,7 @@ class App extends Component {
         let counter = 0;
 
 
-        while(counter < keys.length){
+        while (counter < keys.length) {
             total += this.state.ingredients[keys[counter]].total;
             counter++;
         }
@@ -107,11 +85,11 @@ class App extends Component {
     };
 
     //isDisabled method
-
     isButtonDisabled = (name) => {
         return this.state.ingredients[name].count === 0;
 
     };
 
 }
+
 export default App;
