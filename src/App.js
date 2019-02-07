@@ -56,6 +56,9 @@ class App extends Component {
 
     };
 
+    //rewrite two methods Add and Remove :
+    //
+
     removeIngredient = (name) => {
         let ingredient = {...this.state.ingredients[name]};
         let price = availableIngredients.find(item => item.name === name).price;
